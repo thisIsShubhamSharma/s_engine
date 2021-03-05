@@ -69,7 +69,12 @@ def draw_board(screen):
 
 
 def draw_pieces(screen, board):
-    pass
+    for row in range(DIMENSION):
+        for column in range(DIMENSION):
+            piece = board[row][column]
+            if piece != "--":
+                screen.blit(IMAGES[piece], p.Rect(
+                    column*SQ_SIZE, row*SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
 
 if __name__ == "__main__":
