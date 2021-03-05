@@ -32,11 +32,31 @@ class GameState():
         self.white_to_move = True
         self.move_log = []
 
+    '''
+    move function does not handle castling, am-pasand, pawn promotion
+    '''
+
     def make_move(self, move):
         self.board[move.start_row][move.start_col] = "--"
         self.board[move.end_row][move.end_col] = move.piece_moved
         self.move_log.append(move)  # log moves
         self.white_to_move = not self.white_to_move  # change turn
+
+    '''
+    Undo move function 
+    '''
+
+    def undo_move(self):
+        if len(self.move_log) != 0:
+            move = self.move_log.pop()
+            self.board[move.start_row][move.start_col] = move.piece_moved
+            self.board[move.end_row][move.end_col] = move.piece_captured
+            self.white_to_move = not self.white_to_move
+
+
+'''
+Move class handles moves data and notation conversions.
+'''
 
 
 class Move():
