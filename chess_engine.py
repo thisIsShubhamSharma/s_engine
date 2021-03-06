@@ -96,13 +96,50 @@ class GameState():
                     moves.append(Move((r, c), (r+1, c+1), self.board))
 
     def get_rook_moves(self, r, c, moves):
-        pass
+        # up, left, down, right
+        directions = ((-1, 0), (0, -1), (1, 0), (0, 1))
+        enemy_color = 'b' if self.white_to_move else 'w'
+        for d in directions:
+            for i in range(1, 8):
+                end_row = r + d[0] * i
+                end_col = c + d[1] * i
+                if 0 <= end_row < 8 and 0 <= end_col < 8:  # still on board
+                    end_piece = self.board[end_row][end_col]
+                    if end_piece == '--':  # empty space
+                        moves.append(
+                            Move((r, c), (end_row, end_col), self.board))
+                    elif end_piece[0] == enemy_color:  # enemy piece
+                        moves.append(
+                            Move((r, c), (end_row, end_col), self.board))
+                        break
+                    else:
+                        break
+                else:
+                    break
 
     def get_knight_moves(self, r, c, moves):
         pass
 
     def get_bishop_moves(self, r, c, moves):
-        pass
+        directions = ((-1, -1), (-1, 1), (1, -1), (1, 1))  # 4 diaganols
+        enemy_color = 'b' if self.white_to_move else 'w'
+        for d in directions:
+            for i in range(1, 8):
+                end_row = r + d[0] * i
+                end_col = c + d[1] * i
+                if 0 <= end_row < 8 and 0 <= end_col < 8:  # still on board
+                    end_piece = self.board[end_row][end_col]
+                    if end_piece == '--':  # empty space
+                        moves.append(
+                            Move((r, c), (end_row, end_col), self.board))
+                    elif end_piece[0] == enemy_color:  # enemy piece
+                        moves.append(
+                            Move((r, c), (end_row, end_col), self.board))
+                        break
+                    else:
+                        break
+                else:
+                    break
 
     def get_queen_moves(self, r, c, moves):
         pass
